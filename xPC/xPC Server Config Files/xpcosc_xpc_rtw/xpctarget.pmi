@@ -1,0 +1,14 @@
+#include "xpcosc.pt"
+
+
+const xpc_ParamMappingInfo  xpcparamsMMI[] =
+  {
+    {
+      {xpcosc_PT},
+      "xpcosc",
+      "",
+      "xpcosc",
+      0,
+      20,
+    },
+  };
