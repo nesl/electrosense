@@ -4,5 +4,6 @@ load xpcconfig.mat;
 for i=1:length(xpcconfig.actpropval)
    setxpcenv(xpcconfig.propname(i),xpcconfig.actpropval(i)); 
 end
+updatexpcenv;
 % start xpc server
 xpcnetboot;

@@ -1,5 +1,6 @@
 '''
 python MovingGantry.py --x # --y # --s #
+Threading
 '''
 from gantry2 import Gantry
 import time
@@ -15,7 +16,7 @@ class CMDThreadClass(threading.Thread):
     def run(self):
         args_num = np.zeros((1,3))
         # open file
-        fpathin = r'C:\\Users\newton\Dropbox\echidna2\scripts\echidna_client\newton_source\matlabCOMin.txt'
+        fpathin = r'C:\Users\newton\AeroFS\NESL_Software\electrosense\PYTHON\scripts\matlabCOMin.txt'
         fin = open(fpathin,'r')
         cmd = fin.readline()
         firsttime = 1
@@ -42,7 +43,7 @@ class CMDThreadClass(threading.Thread):
 
 class ReadThreadClass(threading.Thread):
     def run(self):
-        fpathin = r'C:\\Users\newton\Dropbox\echidna2\scripts\echidna_client\newton_source\matlabCOMin.txt'
+        fpathin = r'C:\Users\newton\AeroFS\NESL_Software\electrosense\PYTHON\scripts\matlabCOMin.txt'
         fin = open(fpathin,'r')
         cmd = fin.readline()
         firsttime = 1
@@ -64,7 +65,7 @@ class ReadThreadClass(threading.Thread):
         
         size = args_num.shape[0]
         pos = 0 # start is unknown
-        fpathout = r'C:\Users\newton\Dropbox\echidna2\scripts\echidna_client\newton_source\matlabCOMout.txt'
+        fpathout = r'C:\Users\newton\AeroFS\NESL_Software\electrosense\PYTHON\scripts\matlabCOMout.txt'
         fout =  open(fpathout,'w')
         fout.write("{0:.2f}".format(pos))
         fout.close()

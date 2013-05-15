@@ -1,5 +1,6 @@
 '''
 python MovingGantry.py --x # --y # --s #
+Non Threading
 '''
 from gantry2 import Gantry
 import time
@@ -8,8 +9,8 @@ import numpy as np
 
 rob = Gantry()
 
-fpathout = r'C:\Users\newton\Dropbox\echidna2\scripts\echidna_client\newton_source\matlabCOMout.txt'
-fpathin = r'C:\\Users\newton\Dropbox\echidna2\scripts\echidna_client\newton_source\matlabCOMin.txt'
+fpathout = r'C:\Users\newton\AeroFS\NESL_Software\electrosense\PYTHON\scripts\matlabCOMout.txt'
+fpathin = r'C:\Users\newton\AeroFS\NESL_Software\electrosense\PYTHON\scripts\matlabCOMin.txt'
 fin = open(fpathin,'r')
 
 args_num = np.zeros((1,3))

@@ -11,7 +11,7 @@ Model {
       Name		      "Outport"
     }
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.44"
+    ComputedModelVersion    "1.43"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -31,9 +31,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "newton"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Tue May 14 17:11:51 2013"
+  LastModifiedDate	  "Tue May 14 13:54:45 2013"
   RTWModifiedTimeStamp	  290440484
-  ModelVersionFormat	  "1.%<AutoIncrement:44>"
+  ModelVersionFormat	  "1.%<AutoIncrement:43>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -743,7 +743,7 @@ Model {
       SID		      "30"
       Position		      [15, 108, 80, 132]
       ZOrder		      -10
-      VariableName	      "prbs_train"
+      VariableName	      "prbs_test"
       SampleTime	      "1e-4"
       Interpolate	      off
       ZeroCross		      on
