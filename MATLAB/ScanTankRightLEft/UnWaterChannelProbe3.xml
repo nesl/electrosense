@@ -1,0 +1,228 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Root>
+	<SubSystem>
+		<Name>Scope (xPC) 2</Name>
+		<xPCName>UnWaterChannelProbe3/Scope (xPC) 2</xPCName>
+	</SubSystem>
+	<block>
+		<blkName>Gain</blkName>
+		<xpcblkName>Gain</xpcblkName>
+		<SLblockPath>UnWaterChannelProbe3/Gain</SLblockPath>
+		<isSrc>[0 1 1]</isSrc>
+		<parameter>
+			<paramName>Gain</paramName>
+			<dim>[1, 1]</dim>
+		</parameter>
+	</block>
+	<block>
+		<blkName>Gain1</blkName>
+		<xpcblkName>Gain1</xpcblkName>
+		<SLblockPath>UnWaterChannelProbe3/Gain1</SLblockPath>
+		<isSrc>[0 1 1]</isSrc>
+		<parameter>
+			<paramName>Gain</paramName>
+			<dim>[1, 1]</dim>
+		</parameter>
+	</block>
+	<block>
+		<blkName>Gain2</blkName>
+		<xpcblkName>Gain2</xpcblkName>
+		<SLblockPath>UnWaterChannelProbe3/Gain2</SLblockPath>
+		<isSrc>[0 1 1]</isSrc>
+		<parameter>
+			<paramName>Gain</paramName>
+			<dim>[1, 1]</dim>
+		</parameter>
+	</block>
+	<block>
+		<blkName>Gain3</blkName>
+		<xpcblkName>Gain3</xpcblkName>
+		<SLblockPath>UnWaterChannelProbe3/Gain3</SLblockPath>
+		<isSrc>[0 1 1]</isSrc>
+		<parameter>
+			<paramName>Gain</paramName>
+			<dim>[1, 1]</dim>
+		</parameter>
+	</block>
+	<block>
+		<blkName>PCI-6220 AD1</blkName>
+		<xpcblkName>PCI-6220 AD1</xpcblkName>
+		<SLblockPath>UnWaterChannelProbe3/PCI-6220 AD1</SLblockPath>
+		<isSrc>[1 0 3]</isSrc>
+		<parameter>
+			<paramName>P1</paramName>
+			<dim>[1, 3]</dim>
+		</parameter>
+		<parameter>
+			<paramName>P2</paramName>
+			<dim>[1, 3]</dim>
+		</parameter>
+		<parameter>
+			<paramName>P3</paramName>
+			<dim>[1, 3]</dim>
+		</parameter>
+		<parameter>
+			<paramName>P4</paramName>
+			<dim>[1, 1]</dim>
+		</parameter>
+		<parameter>
+			<paramName>P5</paramName>
+			<dim>[1, 1]</dim>
+		</parameter>
+		<parameter>
+			<paramName>P6</paramName>
+			<dim>[1, 1]</dim>
+		</parameter>
+		<parameter>
+			<paramName>P7</paramName>
+			<dim>[1, 1]</dim>
+		</parameter>
+	</block>
+	<block>
+		<blkName>PCI-6713 DA1</blkName>
+		<xpcblkName>PCI-6713 DA1</xpcblkName>
+		<SLblockPath>UnWaterChannelProbe3/PCI-6713 DA1</SLblockPath>
+		<isSrc>[0 1 0]</isSrc>
+		<parameter>
+			<paramName>P1</paramName>
+			<dim>[1, 1]</dim>
+		</parameter>
+		<parameter>
+			<paramName>P2</paramName>
+			<dim>[1, 1]</dim>
+		</parameter>
+		<parameter>
+			<paramName>P3</paramName>
+			<dim>[1, 1]</dim>
+		</parameter>
+		<parameter>
+			<paramName>P4</paramName>
+			<dim>[1, 1]</dim>
+		</parameter>
+		<parameter>
+			<paramName>P5</paramName>
+			<dim>[1, 1]</dim>
+		</parameter>
+		<parameter>
+			<paramName>P6</paramName>
+			<dim>[1, 1]</dim>
+		</parameter>
+	</block>
+	<block>
+		<blkName>Random
+Source</blkName>
+		<xpcblkName>Random Source</xpcblkName>
+		<SLblockPath>UnWaterChannelProbe3/Random Source</SLblockPath>
+		<isSrc>[1 0 1]</isSrc>
+		<parameter>
+			<paramName>MinRTP</paramName>
+			<dim>[1, 1]</dim>
+		</parameter>
+		<parameter>
+			<paramName>MaxRTP</paramName>
+			<dim>[1, 1]</dim>
+		</parameter>
+	</block>
+	<block>
+		<blkName>Signal
+Generator1</blkName>
+		<xpcblkName>Signal Generator1</xpcblkName>
+		<SLblockPath>UnWaterChannelProbe3/Signal Generator1</SLblockPath>
+		<isSrc>[1 0 1]</isSrc>
+		<parameter>
+			<paramName>Amplitude</paramName>
+			<dim>[1, 1]</dim>
+		</parameter>
+		<parameter>
+			<paramName>Frequency</paramName>
+			<dim>[1, 1]</dim>
+		</parameter>
+	</block>
+	<signal>
+		<sigName>From
+Workspace</sigName>
+		<xpcsigName>From Workspace</xpcsigName>
+		<sigWidth>1</sigWidth>
+		<sigDim>[1, 1]</sigDim>
+	</signal>
+	<signal>
+		<sigName>Gain</sigName>
+		<xpcsigName>Gain</xpcsigName>
+		<sigWidth>1</sigWidth>
+		<sigDim>[1, 1]</sigDim>
+	</signal>
+	<signal>
+		<sigName>Gain1</sigName>
+		<xpcsigName>Gain1</xpcsigName>
+		<sigWidth>1</sigWidth>
+		<sigDim>[1, 1]</sigDim>
+	</signal>
+	<signal>
+		<sigName>Gain2</sigName>
+		<xpcsigName>Gain2</xpcsigName>
+		<sigWidth>1</sigWidth>
+		<sigDim>[1, 1]</sigDim>
+	</signal>
+	<signal>
+		<sigName>Gain3</sigName>
+		<xpcsigName>Gain3</xpcsigName>
+		<sigWidth>1</sigWidth>
+		<sigDim>[1, 1]</sigDim>
+	</signal>
+	<signal>
+		<sigName>Rate Transition</sigName>
+		<xpcsigName>Rate Transition</xpcsigName>
+		<sigWidth>1</sigWidth>
+		<sigDim>[1, 1]</sigDim>
+	</signal>
+	<signal>
+		<sigName>Rate Transition1</sigName>
+		<xpcsigName>Rate Transition1</xpcsigName>
+		<sigWidth>1</sigWidth>
+		<sigDim>[1, 1]</sigDim>
+	</signal>
+	<signal>
+		<sigName>Rate Transition2</sigName>
+		<xpcsigName>Rate Transition2</xpcsigName>
+		<sigWidth>1</sigWidth>
+		<sigDim>[1, 1]</sigDim>
+	</signal>
+	<signal>
+		<sigName>Rate Transition3</sigName>
+		<xpcsigName>Rate Transition3</xpcsigName>
+		<sigWidth>1</sigWidth>
+		<sigDim>[1, 1]</sigDim>
+	</signal>
+	<signal>
+		<sigName>PCI-6220 AD1/p1</sigName>
+		<xpcsigName>PCI-6220 AD1/p1</xpcsigName>
+		<sigWidth>1</sigWidth>
+		<sigDim>[1, 1]</sigDim>
+	</signal>
+	<signal>
+		<sigName>PCI-6220 AD1/p2</sigName>
+		<xpcsigName>PCI-6220 AD1/p2</xpcsigName>
+		<sigWidth>1</sigWidth>
+		<sigDim>[1, 1]</sigDim>
+	</signal>
+	<signal>
+		<sigName>PCI-6220 AD1/p3</sigName>
+		<xpcsigName>PCI-6220 AD1/p3</xpcsigName>
+		<sigWidth>1</sigWidth>
+		<sigDim>[1, 1]</sigDim>
+	</signal>
+	<signal>
+		<sigName>Random
+Source</sigName>
+		<xpcsigName>Random Source</xpcsigName>
+		<sigWidth>1</sigWidth>
+		<sigDim>[1, 1]</sigDim>
+	</signal>
+	<signal>
+		<sigName>Signal
+Generator1</sigName>
+		<xpcsigName>Signal Generator1</xpcsigName>
+		<sigWidth>1</sigWidth>
+		<sigDim>[1, 1]</sigDim>
+	</signal>
+</Root>

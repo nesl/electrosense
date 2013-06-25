@@ -2,6 +2,11 @@
 % Probe channel using probe 1 and also measure
 % the distance from the tank wall
 
+% 5/18/2013
+% After running the equation to solve for x_bar on several subsets of the
+% data collected, we have several vectors for D. Those vectors are averaged
+% out and now I'm going to test the model we have against actual data using
+% lsim.
 %%
 % PRBS for output signal
 % Set simulink parameters
@@ -38,7 +43,7 @@ ValAmpli = 1;   %: Magnitude
 ValDecal = 0;   %: Add-on DC component
 ValLgReg = 10;  %: Register length (# of cells)
 ValDivi = 2;    %: Frequency divider (pulse length multiplier)
-Nsamp = 100;    %: Number of samples
+Nsamp = 10;    %: Number of samples
 prbs_d = create_prbs(ValUinit, ValAmpli, ValDecal, ...
                    ValLgReg, ValDivi, Nsamp, Tappli)';
                
@@ -55,8 +60,9 @@ stem(prbs_movement)
 clc;
 
 start_x = 10;
-start_y = 14;
+start_y = 10;
 speed = 30;
+puase_sec = 0.05;
 
 fpathout = 'C:\Users\newton\AeroFS\NESL_Software\electrosense\PYTHON\scripts\matlabCOMin.txt';
 fpathin = 'C:\Users\newton\AeroFS\NESL_Software\electrosense\PYTHON\scripts\matlabCOMout.txt';
@@ -88,7 +94,7 @@ for i=1:length(trajectory)
     % sample using xpcTarget
     % tg.start;
     display(['location reached ',num2str(status)]);
-    tg.start; pause(0.001);
+    tg.start; pause(pause_sec);
     OutputLog(i,:) = tg.OutputLog(:,1)'; 
 end
 distanceFromWall = 22-(prbs_movement+start_y)+1.25;
@@ -126,7 +132,7 @@ A_bar = [A_bar;zeros(size(A_bar,1)*(length(prbs)-1),size(A_bar,2))];
 for i=1:7
     A_bar = [A_bar,circshift(A_bar,size(A_bar,2))];
 end
-%%
+% Formating the matrix to solve for X_bar vector that has D in it
 load OutputLog;
 d = OutputLog(:,1);
 identy = [1;0;0];
@@ -141,18 +147,17 @@ dist_vector3 = kron(d,identy);
 dist_vector = [dist_vector1,dist_vector2,dist_vector3];
 % add identy at the end for the D variables
 dist_vector = [dist_vector;eye(3)];
-%%
+% truncate the A_bar matrix 
 A_bar_trunc = A_bar(1:30000,1:30000);
 A_bar_trunc = [A_bar_trunc;zeros(3,30000)];
 A_bar_trunc = [A_bar_trunc,dist_vector];
-%% FAIL! Does not finish
+% FAIL! Does not finish
 tic;
 x = (eye(30003)-A_bar_trunc)\B_bar;
 toc;
-%% run small truncated version of code
-% parameters to determine how many sample sets to include
+% run small truncated version of code
 tic;
-data_sets = 40;
+data_sets = 40; % parameters to determine how many sample sets to include
 sample_set = 100;
 distance_set = 100;
 order = size(sys_train.A,1);
@@ -169,3 +174,31 @@ A_bar_sub = [A_bar_sub, dist_vector_sub];
 x = pinv(eye(data_sets*order*sample_set+3) - A_bar_sub)*B_bar_sub;
 display(x(301:303));
 toc;
+%% Test the model
+
+Ts = 1e-4;
+t = (0:Ts:Ts*100-Ts)';
+
+% first combine the inputs B & F
+B_2 = [B,F];
+sys = ss(A,B_2,C,D,Ts);
+
+% format the inputs 
+for index = 1:size(OutputLog,1);
+    distanceFromWall = ones(length(prbs),1).*OutputLog(index,1);
+    rx = OutputLog(index,2:end-1)';
+    rx_avg = mean(OutputLog(index,2:end-1));
+    if rx_avg > 1
+        diff(index) = 0;
+        continue;
+    else
+        rx = rx - rx_avg;
+    end
+    tx = [prbs, distanceFromWall];
+    [y,t,x] = lsim(sys,tx,t);
+    y = y - mean(y);
+    diff(index) = mean((y-rx).^2);
+end
+plot(t,[y,rx]);
+legend('prediction','received');
+

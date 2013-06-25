@@ -1,0 +1,17 @@
+#include "xpcosc.bio"
+#include "xpcosc.lbl"
+#include "xpcosc.sid"
+
+
+const xpc_SigMappingInfo xpcMMI[] =
+  {
+    {
+      {xpcosc_BIO},
+      {xpcosc_SID},
+      {xpcosc_LBL},
+      "",
+      "xpcosc",
+      0,
+      9,
+    },
+  };

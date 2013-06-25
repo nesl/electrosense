@@ -11,7 +11,7 @@ Model {
       Name		      "Outport"
     }
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.11"
+    ComputedModelVersion    "1.22"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -31,9 +31,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "newton"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Mon May 13 16:43:44 2013"
-  RTWModifiedTimeStamp	  290363656
-  ModelVersionFormat	  "1.%<AutoIncrement:11>"
+  LastModifiedDate	  "Tue Jun 18 14:17:56 2013"
+  RTWModifiedTimeStamp	  293457305
+  ModelVersionFormat	  "1.%<AutoIncrement:22>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -118,7 +118,7 @@ Model {
 	  StartTime		  "0.0"
 	  StopTime		  "0.2"
 	  AbsTol		  "auto"
-	  FixedStep		  "0.000250"
+	  FixedStep		  "0.001"
 	  InitialStep		  "auto"
 	  MaxNumMinSteps	  "-1"
 	  MaxOrder		  5
@@ -391,7 +391,7 @@ Model {
 	  Version		  "1.11.0"
 	  Array {
 	    Type		    "Cell"
-	    Dimension		    8
+	    Dimension		    9
 	    Cell		    "IncludeHyperlinkInReport"
 	    Cell		    "GenerateTraceInfo"
 	    Cell		    "GenerateTraceReport"
@@ -400,6 +400,7 @@ Model {
 	    Cell		    "GenerateTraceReportEml"
 	    Cell		    "GenerateSLWebview"
 	    Cell		    "GenerateCodeMetricsReport"
+	    Cell		    "TargetLang"
 	    PropName		    "DisabledProps"
 	  }
 	  SystemTargetFile	  "xpctarget.tlc"
@@ -744,7 +745,7 @@ Model {
   }
   System {
     Name		    "xpcosc"
-    Location		    [425, 244, 1209, 553]
+    Location		    [650, 112, 1270, 771]
     Open		    on
     ModelBrowserVisibility  off
     ModelBrowserWidth	    200
@@ -1020,6 +1021,7 @@ Model {
       }
     }
     Line {
+      Labels		      [0, 0]
       SrcBlock		      "Rate Transition"
       SrcPort		      1
       DstBlock		      "PCI-6713 DA"
@@ -1037,6 +1039,12 @@ Model {
       Points		      [5, 0; 0, -50]
       DstBlock		      "Mux"
       DstPort		      2
+    }
+    Annotation {
+      Position		      [323, 231]
+    }
+    Annotation {
+      Position		      [284, 241]
     }
   }
 }

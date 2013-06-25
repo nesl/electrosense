@@ -1,0 +1,17 @@
+#include "UnWaterChannelProbe.bio"
+#include "UnWaterChannelProbe.lbl"
+#include "UnWaterChannelProbe.sid"
+
+
+const xpc_SigMappingInfo xpcMMI[] =
+  {
+    {
+      {UnWaterChannelProbe_BIO},
+      {UnWaterChannelProbe_SID},
+      {UnWaterChannelProbe_LBL},
+      "",
+      "UnWaterChannelProbe",
+      0,
+      11,
+    },
+  };

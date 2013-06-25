@@ -1,6 +1,7 @@
 '''
 python MovingGantry.py --x # --y # --s #
 Non Threading
+Upload all coordinates in one shot and move the gantry.
 '''
 from gantry2 import Gantry
 import time

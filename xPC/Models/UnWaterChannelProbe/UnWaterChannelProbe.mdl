@@ -11,7 +11,7 @@ Model {
       Name		      "Outport"
     }
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.44"
+    ComputedModelVersion    "1.62"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -31,9 +31,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "newton"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Tue May 14 17:11:51 2013"
-  RTWModifiedTimeStamp	  290440484
-  ModelVersionFormat	  "1.%<AutoIncrement:44>"
+  LastModifiedDate	  "Wed Jun 19 12:15:43 2013"
+  RTWModifiedTimeStamp	  293544545
+  ModelVersionFormat	  "1.%<AutoIncrement:62>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -116,7 +116,7 @@ Model {
 	  $ObjectID		  2
 	  Version		  "1.11.0"
 	  StartTime		  "0"
-	  StopTime		  "0.1"
+	  StopTime		  "0.5"
 	  AbsTol		  "auto"
 	  FixedStep		  "0.0001"
 	  InitialStep		  "auto"
@@ -606,7 +606,7 @@ Model {
       Name		      "Configuration"
       ExtraOptions	      "-aGenerateTraceInfo=0 -aIgnoreTestpoints=0 "
       CurrentDlgPage	      "Solver"
-      ConfigPrmDlgPosition     [ 206, 119, 1075, 690 ] 
+      ConfigPrmDlgPosition     [ 214, 192, 1083, 763 ] 
     }
     PropName		    "ConfigurationSets"
   }
@@ -722,7 +722,7 @@ Model {
   }
   System {
     Name		    "UnWaterChannelProbe"
-    Location		    [329, 151, 1194, 458]
+    Location		    [206, 128, 1247, 446]
     Open		    on
     ModelBrowserVisibility  on
     ModelBrowserWidth	    172
@@ -736,7 +736,7 @@ Model {
     ShowPageBoundaries	    off
     ZoomFactor		    "100"
     ReportName		    "simulink-default.rpt"
-    SIDHighWatermark	    "32"
+    SIDHighWatermark	    "34"
     Block {
       BlockType		      FromWorkspace
       Name		      "From\nWorkspace"
@@ -765,7 +765,16 @@ Model {
       SID		      "32"
       Position		      [70, 180, 105, 210]
       ZOrder		      -8
-      Gain		      "0.25"
+      ParamDataTypeStr	      "Inherit: Inherit via internal rule"
+      OutDataTypeStr	      "Inherit: Inherit via internal rule"
+      SaturateOnIntegerOverflow	off
+    }
+    Block {
+      BlockType		      Gain
+      Name		      "Gain2"
+      SID		      "33"
+      Position		      [575, 135, 605, 165]
+      ZOrder		      -8
       ParamDataTypeStr	      "Inherit: Inherit via internal rule"
       OutDataTypeStr	      "Inherit: Inherit via internal rule"
       SaturateOnIntegerOverflow	off
@@ -774,19 +783,19 @@ Model {
       BlockType		      Mux
       Name		      "Mux"
       SID		      "23"
-      Ports		      [2, 1]
-      Position		      [605, 136, 610, 174]
+      Ports		      [3, 1]
+      Position		      [640, 186, 645, 224]
       ZOrder		      -12
       ShowName		      off
-      Inputs		      "2"
+      Inputs		      "3"
       DisplayOption	      "bar"
     }
     Block {
       BlockType		      S-Function
       Name		      "PCI-6220 AD1"
       SID		      "16"
-      Ports		      [0, 1]
-      Position		      [355, 42, 460, 98]
+      Ports		      [0, 3]
+      Position		      [350, 42, 455, 98]
       ZOrder		      -1
       AncestorBlock	      "xpcnilib/A//D/M Series/PCI-6221 AD"
       LibraryVersion	      "1.264"
@@ -810,13 +819,14 @@ Model {
       MaskInitialization      "boardType=20;\n[maskdisplay, range, coupling, scantime] = madnipcim(2,channel, range, c"
       "oupling, scantime, boardType);\nset_param( gcb, 'MaskDisplay', maskdisplay );\n"
       MaskSelfModifiable      on
-      MaskDisplay	      "disp('PCI-6220\\nNational Instr.\\nAnalog Input'); port_label('output', 1, '1');"
+      MaskDisplay	      "disp('PCI-6220\\nNational Instr.\\nAnalog Input'); port_label('output', 1, '1'); port_label('"
+      "output', 2, '2'); port_label('output', 3, '3');"
       MaskIconFrame	      on
       MaskIconOpaque	      on
       MaskIconRotate	      "none"
       MaskPortRotate	      "default"
       MaskIconUnits	      "autoscale"
-      MaskValueString	      "[1]|[1]|[0]|5e-6|1e-4|-1"
+      MaskValueString	      "[1,2,3]|[10]|[0]|5e-6|1e-4|-1"
     }
     Block {
       BlockType		      Reference
@@ -856,7 +866,7 @@ Model {
       rawSeed		      "1"
       IsInherit		      off
       SampMode		      "Discrete"
-      SampTime		      "1e-4"
+      SampTime		      "1e-3"
       SampFrame		      "1"
       DataType		      "Double"
       OutComplex	      "Real"
@@ -873,6 +883,13 @@ Model {
       Name		      "Rate Transition1"
       SID		      "19"
       Position		      [510, 49, 550, 91]
+      ZOrder		      -10
+    }
+    Block {
+      BlockType		      RateTransition
+      Name		      "Rate Transition2"
+      SID		      "34"
+      Position		      [505, 129, 545, 171]
       ZOrder		      -10
     }
     Block {
@@ -922,9 +939,9 @@ Model {
       Name		      "Signal\nGenerator1"
       SID		      "21"
       Ports		      [0, 1]
-      Position		      [45, 35, 75, 65]
-      WaveForm		      "square"
-      Frequency		      "1e3"
+      Position		      [50, 35, 80, 65]
+      Amplitude		      "2"
+      Frequency		      "500"
     }
     Block {
       BlockType		      Outport
@@ -941,16 +958,17 @@ Model {
       DstPort		      1
     }
     Line {
-      Labels		      [1, 0]
+      Labels		      [2, 0]
       SrcBlock		      "PCI-6220 AD1"
       SrcPort		      1
+      Points		      [0, -20; 35, 0]
       DstBlock		      "Rate Transition1"
       DstPort		      1
     }
     Line {
       SrcBlock		      "Mux"
       SrcPort		      1
-      Points		      [40, 0]
+      Points		      [0, -50; 5, 0]
       Branch {
 	DstBlock		"Scope (xPC) 2"
 	DstPort			1
@@ -968,9 +986,10 @@ Model {
       DstPort		      1
     }
     Line {
+      Labels		      [2, 0]
       SrcBlock		      "Gain"
       SrcPort		      1
-      Points		      [20, 0; 0, 40; -45, 0]
+      Points		      [10, 0]
       DstBlock		      "Mux"
       DstPort		      1
     }
@@ -983,17 +1002,37 @@ Model {
     Line {
       SrcBlock		      "From\nWorkspace"
       SrcPort		      1
-      Points		      [20, 0; 0, -10]
+      Points		      [20, 0]
       Branch {
-	Points			[0, -45; 20, 0]
+	Points			[0, -50]
 	DstBlock		"Rate Transition"
 	DstPort			1
       }
       Branch {
-	Points			[0, 55]
+	Points			[0, 125; 520, 0]
 	DstBlock		"Mux"
-	DstPort			2
+	DstPort			3
       }
+    }
+    Line {
+      SrcBlock		      "Rate Transition2"
+      SrcPort		      1
+      DstBlock		      "Gain2"
+      DstPort		      1
+    }
+    Line {
+      SrcBlock		      "Gain2"
+      SrcPort		      1
+      Points		      [5, 0; 0, 55]
+      DstBlock		      "Mux"
+      DstPort		      2
+    }
+    Line {
+      SrcBlock		      "PCI-6220 AD1"
+      SrcPort		      3
+      Points		      [15, 0; 0, 60]
+      DstBlock		      "Rate Transition2"
+      DstPort		      1
     }
     Annotation {
       Position		      [407, 78]
@@ -1009,6 +1048,12 @@ Model {
     }
     Annotation {
       Position		      [287, 75]
+    }
+    Annotation {
+      Position		      [443, 90]
+    }
+    Annotation {
+      Position		      [428, 82]
     }
   }
 }
