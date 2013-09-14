@@ -3,9 +3,9 @@
  *
  * Code generation for model "UnWaterChannelProbe3.mdl".
  *
- * Model version              : 1.78
+ * Model version              : 1.81
  * Simulink Coder version : 8.0 (R2011a) 09-Mar-2011
- * C source code generated on : Wed Jun 19 13:41:03 2013
+ * C source code generated on : Thu Jul 25 16:27:38 2013
  *
  * Target selection: xpctarget.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping

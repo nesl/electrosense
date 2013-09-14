@@ -31,7 +31,7 @@ save('workspace');
 ValUinit = 0;  %: Initial steady state
 Tappli = 0;    %: Application instant 
 
-ValAmpli = 2;  %: Magnitude
+ValAmpli = 5;  %: Magnitude
 ValDecal = 0;  %: Add-on DC component
 
 ValLgReg = 10;  %: Register length (# of cells)
@@ -56,6 +56,7 @@ sampled_length = Nsamp/2*Ts/1e-4;
 rtwbuild(gcs);
 tg.start; pause(2);
 rx_train = tg.OutputLog(1:sampled_length,1:3); % there is an unknown zero value for the first element
+rx_train_b = rx_train;
 tx = tg.OutputLog(1:sampled_length,4);
 
 % take out any DC bias

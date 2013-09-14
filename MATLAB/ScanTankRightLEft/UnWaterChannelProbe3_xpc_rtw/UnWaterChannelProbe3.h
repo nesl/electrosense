@@ -3,9 +3,9 @@
  *
  * Code generation for model "UnWaterChannelProbe3.mdl".
  *
- * Model version              : 1.78
+ * Model version              : 1.81
  * Simulink Coder version : 8.0 (R2011a) 09-Mar-2011
- * C source code generated on : Wed Jun 19 13:41:03 2013
+ * C source code generated on : Thu Jul 25 16:27:38 2013
  *
  * Target selection: xpctarget.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -795,11 +795,11 @@ typedef struct {
   real_T Gain2;                        /* '<Root>/Gain2' */
   real_T RateTransition3;              /* '<Root>/Rate Transition3' */
   real_T Gain3;                        /* '<Root>/Gain3' */
-  real_T FromWorkspace;                /* '<Root>/From Workspace' */
+  real_T SignalGenerator1;             /* '<Root>/Signal Generator1' */
   real_T RateTransition;               /* '<Root>/Rate Transition' */
+  real_T FromWorkspace;                /* '<Root>/From Workspace' */
   real_T RandomSource;                 /* '<Root>/Random Source' */
   real_T Gain1;                        /* '<Root>/Gain1' */
-  real_T SignalGenerator1;             /* '<Root>/Signal Generator1' */
 } BlockIO_UnWaterChannelProbe3;
 
 /* Block states (auto storage) for system '<Root>' */
@@ -815,14 +815,14 @@ typedef struct {
 
   uint32_T RandomSource_SEED_DWORK;    /* '<Root>/Random Source' */
   int_T PCI6220AD1_IWORK[41];          /* '<Root>/PCI-6220 AD1' */
-  struct {
-    int_T PrevIndex;
-  } FromWorkspace_IWORK;               /* '<Root>/From Workspace' */
-
   int_T PCI6713DA1_IWORK[2];           /* '<Root>/PCI-6713 DA1' */
   struct {
     int_T AcquireOK;
   } SFunction_IWORK;                   /* '<S1>/S-Function' */
+
+  struct {
+    int_T PrevIndex;
+  } FromWorkspace_IWORK;               /* '<Root>/From Workspace' */
 } D_Work_UnWaterChannelProbe3;
 
 /* External outputs (root outports fed by signals with auto storage) */
@@ -897,6 +897,12 @@ struct Parameters_UnWaterChannelProbe3_ {
   real_T Gain3_Gain;                   /* Expression: 1
                                         * Referenced by: '<Root>/Gain3'
                                         */
+  real_T SignalGenerator1_Amplitude;   /* Expression: 10
+                                        * Referenced by: '<Root>/Signal Generator1'
+                                        */
+  real_T SignalGenerator1_Frequency;   /* Expression: 500
+                                        * Referenced by: '<Root>/Signal Generator1'
+                                        */
   real_T PCI6713DA1_P1_Size[2];        /* Computed Parameter: PCI6713DA1_P1_Size
                                         * Referenced by: '<Root>/PCI-6713 DA1'
                                         */
@@ -941,12 +947,6 @@ struct Parameters_UnWaterChannelProbe3_ {
                                         */
   real_T Gain1_Gain;                   /* Expression: 1
                                         * Referenced by: '<Root>/Gain1'
-                                        */
-  real_T SignalGenerator1_Amplitude;   /* Expression: 0
-                                        * Referenced by: '<Root>/Signal Generator1'
-                                        */
-  real_T SignalGenerator1_Frequency;   /* Expression: 500
-                                        * Referenced by: '<Root>/Signal Generator1'
                                         */
 };
 

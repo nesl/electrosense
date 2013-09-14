@@ -3,9 +3,9 @@
  *
  * Code generation for model "UnWaterChannelProbe3.mdl".
  *
- * Model version              : 1.78
+ * Model version              : 1.81
  * Simulink Coder version : 8.0 (R2011a) 09-Mar-2011
- * C source code generated on : Wed Jun 19 13:41:03 2013
+ * C source code generated on : Thu Jul 25 16:27:38 2013
  *
  * Target selection: xpctarget.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -183,6 +183,38 @@ void UnWaterChannelProbe3_output(int_T tid)
   UnWaterChannelProbe3_B.Gain3 = UnWaterChannelProbe3_P.Gain3_Gain *
     UnWaterChannelProbe3_B.RateTransition3;
 
+  /* SignalGenerator: '<Root>/Signal Generator1' */
+  temp = UnWaterChannelProbe3_P.SignalGenerator1_Frequency *
+    UnWaterChannelProbe3_rtM->Timing.t[0];
+  if (temp - floor(temp) >= 0.5) {
+    UnWaterChannelProbe3_B.SignalGenerator1 =
+      UnWaterChannelProbe3_P.SignalGenerator1_Amplitude;
+  } else {
+    UnWaterChannelProbe3_B.SignalGenerator1 =
+      -UnWaterChannelProbe3_P.SignalGenerator1_Amplitude;
+  }
+
+  /* End of SignalGenerator: '<Root>/Signal Generator1' */
+
+  /* Outport: '<Root>/Outport' */
+  UnWaterChannelProbe3_Y.Outport[0] = UnWaterChannelProbe3_B.Gain;
+  UnWaterChannelProbe3_Y.Outport[1] = UnWaterChannelProbe3_B.Gain2;
+  UnWaterChannelProbe3_Y.Outport[2] = UnWaterChannelProbe3_B.Gain3;
+  UnWaterChannelProbe3_Y.Outport[3] = UnWaterChannelProbe3_B.SignalGenerator1;
+
+  /* RateTransition: '<Root>/Rate Transition' */
+  UnWaterChannelProbe3_B.RateTransition =
+    UnWaterChannelProbe3_B.SignalGenerator1;
+
+  /* Level2 S-Function Block: '<Root>/PCI-6713 DA1' (danipci671x) */
+  {
+    SimStruct *rts = UnWaterChannelProbe3_rtM->childSfunctions[1];
+    sfcnOutputs(rts, 1);
+  }
+
+  /* ok to acquire for <S1>/S-Function */
+  UnWaterChannelProbe3_DWork.SFunction_IWORK.AcquireOK = 1;
+
   /* FromWorkspace: '<Root>/From Workspace' */
   {
     real_T t = UnWaterChannelProbe3_rtM->Timing.t[1];
@@ -214,24 +246,6 @@ void UnWaterChannelProbe3_output(int_T tid)
     }
   }
 
-  /* Outport: '<Root>/Outport' */
-  UnWaterChannelProbe3_Y.Outport[0] = UnWaterChannelProbe3_B.Gain;
-  UnWaterChannelProbe3_Y.Outport[1] = UnWaterChannelProbe3_B.Gain2;
-  UnWaterChannelProbe3_Y.Outport[2] = UnWaterChannelProbe3_B.Gain3;
-  UnWaterChannelProbe3_Y.Outport[3] = UnWaterChannelProbe3_B.FromWorkspace;
-
-  /* RateTransition: '<Root>/Rate Transition' */
-  UnWaterChannelProbe3_B.RateTransition = UnWaterChannelProbe3_B.FromWorkspace;
-
-  /* Level2 S-Function Block: '<Root>/PCI-6713 DA1' (danipci671x) */
-  {
-    SimStruct *rts = UnWaterChannelProbe3_rtM->childSfunctions[1];
-    sfcnOutputs(rts, 1);
-  }
-
-  /* ok to acquire for <S1>/S-Function */
-  UnWaterChannelProbe3_DWork.SFunction_IWORK.AcquireOK = 1;
-
   /* S-Function (sdsprandsrc2): '<Root>/Random Source' */
   RandSrc_U_D(&UnWaterChannelProbe3_B.RandomSource,
               &UnWaterChannelProbe3_P.RandomSource_MinRTP, 1,
@@ -241,19 +255,6 @@ void UnWaterChannelProbe3_output(int_T tid)
   /* Gain: '<Root>/Gain1' */
   UnWaterChannelProbe3_B.Gain1 = UnWaterChannelProbe3_P.Gain1_Gain *
     UnWaterChannelProbe3_B.RandomSource;
-
-  /* SignalGenerator: '<Root>/Signal Generator1' */
-  temp = UnWaterChannelProbe3_P.SignalGenerator1_Frequency *
-    UnWaterChannelProbe3_rtM->Timing.t[0];
-  if (temp - floor(temp) >= 0.5) {
-    UnWaterChannelProbe3_B.SignalGenerator1 =
-      UnWaterChannelProbe3_P.SignalGenerator1_Amplitude;
-  } else {
-    UnWaterChannelProbe3_B.SignalGenerator1 =
-      -UnWaterChannelProbe3_P.SignalGenerator1_Amplitude;
-  }
-
-  /* End of SignalGenerator: '<Root>/Signal Generator1' */
 
   /* tid is required for a uniform function interface.
    * Argument tid is not used in the function. */
@@ -481,10 +482,10 @@ void UnWaterChannelProbe3_initialize(boolean_T firstTime)
   }
 
   /* external mode info */
-  UnWaterChannelProbe3_rtM->Sizes.checksums[0] = (932112434U);
-  UnWaterChannelProbe3_rtM->Sizes.checksums[1] = (1444229945U);
-  UnWaterChannelProbe3_rtM->Sizes.checksums[2] = (2008472164U);
-  UnWaterChannelProbe3_rtM->Sizes.checksums[3] = (3175955013U);
+  UnWaterChannelProbe3_rtM->Sizes.checksums[0] = (1714664863U);
+  UnWaterChannelProbe3_rtM->Sizes.checksums[1] = (1779488658U);
+  UnWaterChannelProbe3_rtM->Sizes.checksums[2] = (474462432U);
+  UnWaterChannelProbe3_rtM->Sizes.checksums[3] = (3529219187U);
 
   {
     static const sysRanDType rtAlwaysEnabled = SUBSYS_RAN_BC_ENABLE;
@@ -522,11 +523,11 @@ void UnWaterChannelProbe3_initialize(boolean_T firstTime)
     UnWaterChannelProbe3_B.Gain2 = 0.0;
     UnWaterChannelProbe3_B.RateTransition3 = 0.0;
     UnWaterChannelProbe3_B.Gain3 = 0.0;
-    UnWaterChannelProbe3_B.FromWorkspace = 0.0;
+    UnWaterChannelProbe3_B.SignalGenerator1 = 0.0;
     UnWaterChannelProbe3_B.RateTransition = 0.0;
+    UnWaterChannelProbe3_B.FromWorkspace = 0.0;
     UnWaterChannelProbe3_B.RandomSource = 0.0;
     UnWaterChannelProbe3_B.Gain1 = 0.0;
-    UnWaterChannelProbe3_B.SignalGenerator1 = 0.0;
   }
 
   /* parameters */
@@ -981,6 +982,45 @@ void MdlStart(void)
         return;
     }
 
+    /* Level2 S-Function Block: '<Root>/PCI-6713 DA1' (danipci671x) */
+    {
+      SimStruct *rts = UnWaterChannelProbe3_rtM->childSfunctions[1];
+      sfcnStart(rts);
+      if (ssGetErrorStatus(rts) != (NULL))
+        return;
+    }
+
+    /* S-Function Block: <S1>/S-Function (scblock) */
+    {
+      int i;
+      if ((i = rl32eScopeExists(4)) == 0) {
+        if ((i = rl32eDefScope(4,2)) != 0) {
+          printf("Error creating scope 4\n");
+        } else {
+          rl32eAddSignal(4, rl32eGetSignalNo("Gain"));
+          rl32eAddSignal(4, rl32eGetSignalNo("Gain2"));
+          rl32eAddSignal(4, rl32eGetSignalNo("Gain3"));
+          rl32eAddSignal(4, rl32eGetSignalNo("Signal Generator1"));
+          rl32eSetScope(4, 4, 100);
+          rl32eSetScope(4, 40, 0);
+          rl32eSetScope(4, 7, 1);
+          rl32eSetScope(4, 0, 0);
+          rl32eSetScope(4, 3, rl32eGetSignalNo("Gain"));
+          rl32eSetScope(4, 1, 0.0);
+          rl32eSetScope(4, 2, 0);
+          rl32eSetScope(4, 10, 0);
+          rl32eSetTargetScope(4, 11, 0.0);
+          rl32eSetTargetScope(4, 10, 0.0);
+          xpceScopeAcqOK(4,
+                         &UnWaterChannelProbe3_DWork.SFunction_IWORK.AcquireOK);
+        }
+      }
+
+      if (i) {
+        rl32eRestartAcquisition(4);
+      }
+    }
+
     /* Start for FromWorkspace: '<Root>/From Workspace' */
     {
       static real_T pTimeValues[] = { 0.0, 0.001, 0.002, 0.003, 0.004, 0.005,
@@ -1017,45 +1057,6 @@ void MdlStart(void)
       UnWaterChannelProbe3_DWork.FromWorkspace_PWORK.DataPtr = (void *)
         pDataValues;
       UnWaterChannelProbe3_DWork.FromWorkspace_IWORK.PrevIndex = 0;
-    }
-
-    /* Level2 S-Function Block: '<Root>/PCI-6713 DA1' (danipci671x) */
-    {
-      SimStruct *rts = UnWaterChannelProbe3_rtM->childSfunctions[1];
-      sfcnStart(rts);
-      if (ssGetErrorStatus(rts) != (NULL))
-        return;
-    }
-
-    /* S-Function Block: <S1>/S-Function (scblock) */
-    {
-      int i;
-      if ((i = rl32eScopeExists(4)) == 0) {
-        if ((i = rl32eDefScope(4,2)) != 0) {
-          printf("Error creating scope 4\n");
-        } else {
-          rl32eAddSignal(4, rl32eGetSignalNo("Gain"));
-          rl32eAddSignal(4, rl32eGetSignalNo("Gain2"));
-          rl32eAddSignal(4, rl32eGetSignalNo("Gain3"));
-          rl32eAddSignal(4, rl32eGetSignalNo("From Workspace"));
-          rl32eSetScope(4, 4, 100);
-          rl32eSetScope(4, 40, 0);
-          rl32eSetScope(4, 7, 1);
-          rl32eSetScope(4, 0, 0);
-          rl32eSetScope(4, 3, rl32eGetSignalNo("Gain"));
-          rl32eSetScope(4, 1, 0.0);
-          rl32eSetScope(4, 2, 0);
-          rl32eSetScope(4, 10, 0);
-          rl32eSetTargetScope(4, 11, 0.0);
-          rl32eSetTargetScope(4, 10, 0.0);
-          xpceScopeAcqOK(4,
-                         &UnWaterChannelProbe3_DWork.SFunction_IWORK.AcquireOK);
-        }
-      }
-
-      if (i) {
-        rl32eRestartAcquisition(4);
-      }
     }
 
     /* Start for S-Function (sdsprandsrc2): '<Root>/Random Source' */

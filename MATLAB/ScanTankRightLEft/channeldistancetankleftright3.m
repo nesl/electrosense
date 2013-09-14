@@ -27,7 +27,7 @@ Nsamp = 100;     %: Number of samples
 prbs = create_prbs(ValUinit, ValAmpli, ValDecal, ValLgReg, ValDivi, Nsamp, Tappli)';
 Ts = 1e-3;
 t = (0:Ts:Ts*Nsamp-Ts)';
-prbs_test = [t, prbs(1:Nsamp)];
+prbs_train = [t, prbs(1:Nsamp)];
 stem(prbs);
 %%
 movement = 0:0.5:19;
@@ -87,7 +87,7 @@ end
 distanceFromWall = (19-(movement+start_y))';
 % add distance from wall measurement.
 OutputLog{1} = distanceFromWall;
-
+trans_signal = tg.OutputLog(1:1000,4);
 %% compare error between model and rx signal (no distnace incorporated)
 Ts_out = 1e-4;
 [A,B,C,D] = ssdata(sys_train);
