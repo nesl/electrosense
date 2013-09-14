@@ -1,0 +1,17 @@
+#include "UnWaterChannelProbeTestSymmetry.bio"
+#include "UnWaterChannelProbeTestSymmetry.lbl"
+#include "UnWaterChannelProbeTestSymmetry.sid"
+
+
+const xpc_SigMappingInfo xpcMMI[] =
+  {
+    {
+      {UnWaterChannelProbeTestSymmetry_BIO},
+      {UnWaterChannelProbeTestSymmetry_SID},
+      {UnWaterChannelProbeTestSymmetry_LBL},
+      "",
+      "UnWaterChannelProbeTestSymmetry",
+      0,
+      25,
+    },
+  };
