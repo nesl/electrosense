@@ -16,7 +16,7 @@ save('workspace');
 %%
 %                 ____  Valdecal + ValAmpli         __________      ____
 %                |    |                            |          |    |
-% Valdecal       -|----|--------                    |          |    |
+% Valdecal       |----|--------                    |          |    |
 %                |    |____________________________|          |____|
 %                |
 %                |
@@ -57,7 +57,7 @@ rtwbuild(gcs);
 tg.start; pause(2);
 rx_train = tg.OutputLog(1:sampled_length,1:3); % there is an unknown zero value for the first element
 rx_train_b = rx_train;
-tx = tg.OutputLog(1:sampled_length,4);
+tx_train = tg.OutputLog(1:sampled_length,4);
 
 % take out any DC bias
 rx_average_train = mean(rx_train,1)';
@@ -65,9 +65,9 @@ for i=1:size(rx_train,2);
     rx_train(:,i) = rx_train(:,i) - ones(sampled_length,1).*rx_average_train(i);
 end
 
-data = iddata(rx_train, tx, Ts_out); 
+data_train = iddata(rx_train, tx_train, Ts_out); 
 % get state-space model using subspace method
-[sys_train, x0_train] = n4sid(data,'best'); % 'best' extimates the order
+[sys_train, x0_train] = n4sid(data_train,3); % 'best' extimates the order
 %% Test model (manual)
 % rebuild simulink model
 
@@ -80,7 +80,7 @@ tx_test = tg.OutputLog(1:sampled_length,4);
 
 rx_average_test = mean(rx_test,1);
 for i=1:3
-rx_test(:,i) = rx_test(:,i) - ones(sampled_length,1).*rx_average_test(i);
+    rx_test(:,i) = rx_test(:,i) - ones(sampled_length,1).*rx_average_test(i);
 end
 
 t = (0:Ts_out:Ts_out*sampled_length-Ts_out)';
@@ -88,13 +88,13 @@ t = (0:Ts_out:Ts_out*sampled_length-Ts_out)';
 sys = ss(A,B,C,D,Ts_out);
 [y,t,x] = lsim(sys,tx_test,t);
 err = norm(y-rx_test);
-
+%%
 % Plot the signals received signal and the model side by side
 % figure()
 % subplot(1,1,1)
-% interval = 101:500;
-% plot(t(interval),rx_test(interval),t(interval),y(interval)); axis tight;
-% legend('sample','model')
+interval = 1:500;
+plot(t(interval),rx_test(interval),t(interval),y(interval)); axis tight;
+legend('sample','model')
 
 %% Test model (automated)
 % Automated test to collect error drift
@@ -149,3 +149,25 @@ sys = ss(A,B,C,D,Ts);
 interval = 1:100;
 plot(t(interval),rx(interval),t(interval),y(interval)); axis tight;
 legend('sample','model')
+%% Run Whiteness and Independence test
+
+% freq = 500 Hz
+Ts_out = 1e-4; % Ts_out is the received sampling frequency
+sampled_length = Nsamp/2*Ts/1e-4;
+
+% ONLY uncomment if you want to run the simulink model
+% Don't forget to change to testing signal
+rtwbuild(gcs);
+tg.start; pause(2);
+rx_test = tg.OutputLog(1:sampled_length,1:3); % there is an unknown zero value for the first element
+rx_test_b = rx_test; % rx_train with the DC bias
+tx_test = tg.OutputLog(1:sampled_length,4);
+
+% take out any DC bias
+rx_average_test = mean(rx_test,1)';
+for i=1:size(rx_test,2);
+    rx_test(:,i) = rx_test(:,i) - ones(sampled_length,1).*rx_average_test(i);
+end
+
+data_test = iddata(rx_test, tx_test, Ts_out);
+resid(sys_train,data_test,'corr',50);

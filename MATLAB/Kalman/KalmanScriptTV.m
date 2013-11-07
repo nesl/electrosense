@@ -8,7 +8,7 @@
 load OutputLog
 load trans_signal
 load sys_train
-load Ts_out;
+load Ts_out
 %%
 dist = OutputLog{1};
 data = OutputLog(:,2:end);
@@ -33,14 +33,15 @@ t = t';
 
 index = 1;
 Kresult = {};
-dist_index = 39:-1:30;
+dist_index = 39:-1:1;
 ye = {};
 errcov = {};
 
 % Kalman Filter
 for i=dist_index
     % artificial delay in the sampling hardware taken out;
-    yv = [data{i}(2:981,1) data{i}(2:981,2) data{i}(2:981,3)]; % remove artificial delay due to system
+    %yv = [data{i}(2:981,1) data{i}(2:981,2) data{i}(2:981,3)]; % remove artificial delay due to system
+    yv = data{i}
     yv_mean = mean(yv);
     yv = yv - kron(ones(size(yv,1),1),yv_mean); % model does not incorporate mean
 
@@ -100,7 +101,7 @@ end
 
 %% Linear
 
-X = [ones(size(x,1),1) x];
+X = [ones(size(x,1),1) x ];
 [b,bint] = regress(y,X);
 results = X*b;
 %errlin = sse(y-results);
@@ -140,34 +141,73 @@ scatter(1:4,errtrend)
 xlabel('Regression Order')
 ylabel('Sum Square Error')
 
-%%
+%% 
 % save data
-x_33 = x;
-y_33 = y;
-sys_train_33 = sys_train;
-OutputLog_33 = OutputLog;
-rx_train_33 = rx_train;
-rx_train_sqr_33 = rx_train_sqr;
-rx_train_b_33 = rx_train_b;
-bintquad_33 = bintquad;
-bquad_33 = bquad;
-bint4th_33 = bint4th;
-b4th_33 = b4th;
-save('x_33','x_33');
-save('y_33','y_33');
-save('sys_train_33','sys_train_33');
-save('OutputLog_33','OutputLog_33');
-save('rx_train_33','rx_train_33');
-save('rx_train_sqr_33','rx_train_sqr_33');
-save('rx_train_b_33','rx_train_b_33');
-save('bint4th_33','bint4th_33');
-save('b4th_33','b4th_33');
-save('bintquad_33','bintquad_33')
-save('bquad_33','bquad_33')
+x_60 = x;
+y_60 = y;
+sys_train_60 = sys_train;
+OutputLog_60 = OutputLog;
+rx_train_60 = rx_train;
+rx_train_sqr_60 = rx_train_sqr; 
+rx_train_b_60 = rx_train_b;
+bintquad_60 = bintquad;
+bquad_60 = bquad;
+bint4th_60 = bint4th;
+b4th_60 = b4th;
+num = 60;
+save(['x_',num2str(num,'%02d')],['x_',num2str(num,'%02d')]);
+save(['y_',num2str(num,'%02d')],['y_',num2str(num,'%02d')]);
+save(['sys_train_',num2str(num,'%02d')],['sys_train_',num2str(num,'%02d')]);
+save(['OutputLog_',num2str(num,'%02d')],['OutputLog_',num2str(num,'%02d')]);
+save(['rx_train_',num2str(num,'%02d')],['rx_train_',num2str(num,'%02d')]);
+save(['rx_train_sqr_',num2str(num,'%02d')],['rx_train_sqr_',num2str(num,'%02d')]);
+save(['rx_train_b_',num2str(num,'%02d')],['rx_train_b_',num2str(num,'%02d')]);
+save(['bint4th_',num2str(num,'%02d')],['bint4th_',num2str(num,'%02d')]);
+save(['b4th_',num2str(num,'%02d')],['b4th_',num2str(num,'%02d')]);
+save(['bintquad_',num2str(num,'%02d')],['bintquad_',num2str(num,'%02d')])
+save(['bquad_',num2str(num,'%02d')],['bquad_',num2str(num,'%02d')])
+%% used for showing varations over time in environment
+sys_train_01 = sys_train;
+rx_train_01 = rx_train;
+rx_train_b_01 = rx_train_b;
+x_01 = x;
+y_01 = y;
+OutputLog_01 = OutputLog;
+save('x_01','x_01');
+save('y_01','y_01');
+save('OutputLog_01','OutputLog_01');
+save('rx_train_01','rx_train_01');
+save('rx_train_b_01','rx_train_b_01');
+save('sys_train_01','sys_train_01');
+
+
+%% TEst
+
+xtemp2 = [];
+for j = 1:size(x,1)/30
+   starti = 1 + (j-1)*30;
+   endi = starti + 29;
+   xtemp2(j,:) = mean(x(starti:endi,:));
+end
+
+% include averaging to estimate values
+ytemp2 = [];
+for j = 1:size(y,1)/30
+  starti = 1 + (j-1)*30;
+  endi = starti + 29;
+  ytemp2(j,:) = mean(y(starti:endi,:));
+end
 %%
-x_31_4 = x;
-y_31_4 = y;
-OutputLog_31_4 = OutputLog;
-save('x_31_4','x_31_4');
-save('y_31_4','y_31_4');
-save('OutputLog_31_4','OutputLog_31_4');
+scatter(ytemp2(1:2:16),(1./xtemp2(1:2:16,1)).^(1/3),100,'filled');
+%hold on;
+scatter(ytemp2(1:2:16),(1./xtemp2(1:2:16,2)).^(1/3),100,'filled');
+scatter(ytemp2(1:2:16),(1./xtemp2(1:2:16,3)).^(1/3),100,'filled');
+%hold off;
+legend('1','2','3')
+%axis([0,7.5,0,0.025])
+ylabel('Averaged Kalman filter output');
+xlabel('distance from target (inches)');
+title('Target at 45 degrees form center')
+%%
+
+scatter(ytemp2(1:16,:),sum(xtemp2(1:16,:),2));

@@ -3,9 +3,9 @@
  *
  * Code generation for model "UnWaterChannelProbe3.mdl".
  *
- * Model version              : 1.129
+ * Model version              : 1.201
  * Simulink Coder version : 8.0 (R2011a) 09-Mar-2011
- * C source code generated on : Fri Sep 13 16:53:58 2013
+ * C source code generated on : Tue Nov 05 11:38:55 2013
  *
  * Target selection: xpctarget.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -89,12 +89,6 @@ Parameters_UnWaterChannelProbe3 UnWaterChannelProbe3_P = {
   1.0,                                 /* Expression: 1
                                         * Referenced by: '<Root>/Gain3'
                                         */
-  10.0,                                /* Expression: 10
-                                        * Referenced by: '<Root>/Signal Generator1'
-                                        */
-  500.0,                               /* Expression: 500
-                                        * Referenced by: '<Root>/Signal Generator1'
-                                        */
 
   /*  Computed Parameter: PCI6713DA1_P1_Size
    * Referenced by: '<Root>/PCI-6713 DA1'
@@ -149,7 +143,13 @@ Parameters_UnWaterChannelProbe3 UnWaterChannelProbe3_P = {
   4.0,                                 /* Expression: MaxVal
                                         * Referenced by: '<Root>/Random Source'
                                         */
-  1.0                                  /* Expression: 1
+  1.0,                                 /* Expression: 1
                                         * Referenced by: '<Root>/Gain1'
+                                        */
+  10.0,                                /* Expression: 10
+                                        * Referenced by: '<Root>/Signal Generator1'
+                                        */
+  500.0                                /* Expression: 500
+                                        * Referenced by: '<Root>/Signal Generator1'
                                         */
 };

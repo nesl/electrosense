@@ -3,9 +3,9 @@
  *
  * Code generation for model "UnWaterChannelProbe3.mdl".
  *
- * Model version              : 1.129
+ * Model version              : 1.201
  * Simulink Coder version : 8.0 (R2011a) 09-Mar-2011
- * C source code generated on : Fri Sep 13 16:53:58 2013
+ * C source code generated on : Tue Nov 05 11:38:55 2013
  *
  * Target selection: xpctarget.tlc
  * Note: GRT includes extra infrastructure and instrumentation for prototyping
@@ -183,38 +183,6 @@ void UnWaterChannelProbe3_output(int_T tid)
   UnWaterChannelProbe3_B.Gain3 = UnWaterChannelProbe3_P.Gain3_Gain *
     UnWaterChannelProbe3_B.RateTransition3;
 
-  /* SignalGenerator: '<Root>/Signal Generator1' */
-  temp = UnWaterChannelProbe3_P.SignalGenerator1_Frequency *
-    UnWaterChannelProbe3_rtM->Timing.t[0];
-  if (temp - floor(temp) >= 0.5) {
-    UnWaterChannelProbe3_B.SignalGenerator1 =
-      UnWaterChannelProbe3_P.SignalGenerator1_Amplitude;
-  } else {
-    UnWaterChannelProbe3_B.SignalGenerator1 =
-      -UnWaterChannelProbe3_P.SignalGenerator1_Amplitude;
-  }
-
-  /* End of SignalGenerator: '<Root>/Signal Generator1' */
-
-  /* Outport: '<Root>/Outport' */
-  UnWaterChannelProbe3_Y.Outport[0] = UnWaterChannelProbe3_B.Gain;
-  UnWaterChannelProbe3_Y.Outport[1] = UnWaterChannelProbe3_B.Gain2;
-  UnWaterChannelProbe3_Y.Outport[2] = UnWaterChannelProbe3_B.Gain3;
-  UnWaterChannelProbe3_Y.Outport[3] = UnWaterChannelProbe3_B.SignalGenerator1;
-
-  /* RateTransition: '<Root>/Rate Transition' */
-  UnWaterChannelProbe3_B.RateTransition =
-    UnWaterChannelProbe3_B.SignalGenerator1;
-
-  /* Level2 S-Function Block: '<Root>/PCI-6713 DA1' (danipci671x) */
-  {
-    SimStruct *rts = UnWaterChannelProbe3_rtM->childSfunctions[1];
-    sfcnOutputs(rts, 1);
-  }
-
-  /* ok to acquire for <S1>/S-Function */
-  UnWaterChannelProbe3_DWork.SFunction_IWORK.AcquireOK = 1;
-
   /* FromWorkspace: '<Root>/From Workspace' */
   {
     real_T t = UnWaterChannelProbe3_rtM->Timing.t[1];
@@ -224,9 +192,9 @@ void UnWaterChannelProbe3_output(int_T tid)
       UnWaterChannelProbe3_DWork.FromWorkspace_PWORK.DataPtr;
     if (t < pTimeValues[0]) {
       UnWaterChannelProbe3_B.FromWorkspace = 0.0;
-    } else if (t == pTimeValues[99]) {
-      UnWaterChannelProbe3_B.FromWorkspace = pDataValues[99];
-    } else if (t > pTimeValues[99]) {
+    } else if (t == pTimeValues[499]) {
+      UnWaterChannelProbe3_B.FromWorkspace = pDataValues[499];
+    } else if (t > pTimeValues[499]) {
       UnWaterChannelProbe3_B.FromWorkspace = 0.0;
     } else {
       int_T currTimeIndex =
@@ -246,6 +214,24 @@ void UnWaterChannelProbe3_output(int_T tid)
     }
   }
 
+  /* Outport: '<Root>/Outport' */
+  UnWaterChannelProbe3_Y.Outport[0] = UnWaterChannelProbe3_B.Gain;
+  UnWaterChannelProbe3_Y.Outport[1] = UnWaterChannelProbe3_B.Gain2;
+  UnWaterChannelProbe3_Y.Outport[2] = UnWaterChannelProbe3_B.Gain3;
+  UnWaterChannelProbe3_Y.Outport[3] = UnWaterChannelProbe3_B.FromWorkspace;
+
+  /* RateTransition: '<Root>/Rate Transition' */
+  UnWaterChannelProbe3_B.RateTransition = UnWaterChannelProbe3_B.FromWorkspace;
+
+  /* Level2 S-Function Block: '<Root>/PCI-6713 DA1' (danipci671x) */
+  {
+    SimStruct *rts = UnWaterChannelProbe3_rtM->childSfunctions[1];
+    sfcnOutputs(rts, 1);
+  }
+
+  /* ok to acquire for <S1>/S-Function */
+  UnWaterChannelProbe3_DWork.SFunction_IWORK.AcquireOK = 1;
+
   /* S-Function (sdsprandsrc2): '<Root>/Random Source' */
   RandSrc_U_D(&UnWaterChannelProbe3_B.RandomSource,
               &UnWaterChannelProbe3_P.RandomSource_MinRTP, 1,
@@ -255,6 +241,19 @@ void UnWaterChannelProbe3_output(int_T tid)
   /* Gain: '<Root>/Gain1' */
   UnWaterChannelProbe3_B.Gain1 = UnWaterChannelProbe3_P.Gain1_Gain *
     UnWaterChannelProbe3_B.RandomSource;
+
+  /* SignalGenerator: '<Root>/Signal Generator1' */
+  temp = UnWaterChannelProbe3_P.SignalGenerator1_Frequency *
+    UnWaterChannelProbe3_rtM->Timing.t[0];
+  if (temp - floor(temp) >= 0.5) {
+    UnWaterChannelProbe3_B.SignalGenerator1 =
+      UnWaterChannelProbe3_P.SignalGenerator1_Amplitude;
+  } else {
+    UnWaterChannelProbe3_B.SignalGenerator1 =
+      -UnWaterChannelProbe3_P.SignalGenerator1_Amplitude;
+  }
+
+  /* End of SignalGenerator: '<Root>/Signal Generator1' */
 
   /* tid is required for a uniform function interface.
    * Argument tid is not used in the function. */
@@ -372,7 +371,7 @@ void UnWaterChannelProbe3_initialize(boolean_T firstTime)
     UnWaterChannelProbe3_rtM->Timing.sampleHits = (&mdlSampleHits[0]);
   }
 
-  rtmSetTFinal(UnWaterChannelProbe3_rtM, 0.1);
+  rtmSetTFinal(UnWaterChannelProbe3_rtM, 0.5);
   UnWaterChannelProbe3_rtM->Timing.stepSize0 = 0.0001;
   UnWaterChannelProbe3_rtM->Timing.stepSize1 = 0.0001;
 
@@ -482,10 +481,10 @@ void UnWaterChannelProbe3_initialize(boolean_T firstTime)
   }
 
   /* external mode info */
-  UnWaterChannelProbe3_rtM->Sizes.checksums[0] = (1714664863U);
-  UnWaterChannelProbe3_rtM->Sizes.checksums[1] = (1779488658U);
-  UnWaterChannelProbe3_rtM->Sizes.checksums[2] = (474462432U);
-  UnWaterChannelProbe3_rtM->Sizes.checksums[3] = (3529219187U);
+  UnWaterChannelProbe3_rtM->Sizes.checksums[0] = (55247104U);
+  UnWaterChannelProbe3_rtM->Sizes.checksums[1] = (1023060937U);
+  UnWaterChannelProbe3_rtM->Sizes.checksums[2] = (495000499U);
+  UnWaterChannelProbe3_rtM->Sizes.checksums[3] = (637085185U);
 
   {
     static const sysRanDType rtAlwaysEnabled = SUBSYS_RAN_BC_ENABLE;
@@ -523,11 +522,11 @@ void UnWaterChannelProbe3_initialize(boolean_T firstTime)
     UnWaterChannelProbe3_B.Gain2 = 0.0;
     UnWaterChannelProbe3_B.RateTransition3 = 0.0;
     UnWaterChannelProbe3_B.Gain3 = 0.0;
-    UnWaterChannelProbe3_B.SignalGenerator1 = 0.0;
-    UnWaterChannelProbe3_B.RateTransition = 0.0;
     UnWaterChannelProbe3_B.FromWorkspace = 0.0;
+    UnWaterChannelProbe3_B.RateTransition = 0.0;
     UnWaterChannelProbe3_B.RandomSource = 0.0;
     UnWaterChannelProbe3_B.Gain1 = 0.0;
+    UnWaterChannelProbe3_B.SignalGenerator1 = 0.0;
   }
 
   /* parameters */
@@ -982,6 +981,125 @@ void MdlStart(void)
         return;
     }
 
+    /* Start for FromWorkspace: '<Root>/From Workspace' */
+    {
+      static real_T pTimeValues[] = { 0.0, 0.001, 0.002, 0.003, 0.004, 0.005,
+        0.006, 0.007, 0.008, 0.0090000000000000011, 0.01, 0.011, 0.012,
+        0.013000000000000001, 0.014, 0.015, 0.016, 0.017, 0.018000000000000002,
+        0.019, 0.02, 0.021, 0.022, 0.023, 0.024, 0.025, 0.026000000000000002,
+        0.027, 0.028, 0.029, 0.03, 0.031, 0.032, 0.033, 0.034, 0.035,
+        0.036000000000000004, 0.037, 0.038, 0.039, 0.04, 0.041, 0.042,
+        0.043000000000000003, 0.044, 0.045, 0.046, 0.047, 0.048, 0.049, 0.05,
+        0.051000000000000004, 0.052000000000000005, 0.053, 0.054, 0.055, 0.056,
+        0.057, 0.058, 0.059000000000000004, 0.06, 0.061, 0.062, 0.063, 0.064,
+        0.065, 0.066, 0.067, 0.068, 0.069, 0.07, 0.071000000000000008,
+        0.072000000000000008, 0.073, 0.074, 0.075, 0.076, 0.077, 0.078, 0.079,
+        0.08, 0.081, 0.082, 0.083, 0.084, 0.085, 0.086000000000000007,
+        0.087000000000000008, 0.088, 0.089, 0.09, 0.091, 0.092, 0.093, 0.094,
+        0.095, 0.096, 0.097, 0.098, 0.099, 0.1, 0.101, 0.10200000000000001,
+        0.10300000000000001, 0.10400000000000001, 0.105, 0.106, 0.107, 0.108,
+        0.109, 0.11, 0.111, 0.112, 0.113, 0.114, 0.115, 0.116, 0.117,
+        0.11800000000000001, 0.11900000000000001, 0.12, 0.121, 0.122, 0.123,
+        0.124, 0.125, 0.126, 0.127, 0.128, 0.129, 0.13, 0.131, 0.132, 0.133,
+        0.134, 0.135, 0.136, 0.137, 0.138, 0.139, 0.14, 0.14100000000000001,
+        0.14200000000000002, 0.14300000000000002, 0.14400000000000002, 0.145,
+        0.146, 0.147, 0.148, 0.149, 0.15, 0.151, 0.152, 0.153, 0.154, 0.155,
+        0.156, 0.157, 0.158, 0.159, 0.16, 0.161, 0.162, 0.163, 0.164, 0.165,
+        0.166, 0.167, 0.168, 0.169, 0.17, 0.171, 0.17200000000000001,
+        0.17300000000000001, 0.17400000000000002, 0.17500000000000002, 0.176,
+        0.177, 0.178, 0.179, 0.18, 0.181, 0.182, 0.183, 0.184, 0.185, 0.186,
+        0.187, 0.188, 0.189, 0.19, 0.191, 0.192, 0.193, 0.194, 0.195, 0.196,
+        0.197, 0.198, 0.199, 0.2, 0.201, 0.202, 0.203, 0.20400000000000001,
+        0.20500000000000002, 0.20600000000000002, 0.20700000000000002,
+        0.20800000000000002, 0.209, 0.21, 0.211, 0.212, 0.213, 0.214, 0.215,
+        0.216, 0.217, 0.218, 0.219, 0.22, 0.221, 0.222, 0.223, 0.224, 0.225,
+        0.226, 0.227, 0.228, 0.229, 0.23, 0.231, 0.232, 0.233, 0.234,
+        0.23500000000000001, 0.23600000000000002, 0.23700000000000002,
+        0.23800000000000002, 0.23900000000000002, 0.24, 0.241, 0.242, 0.243,
+        0.244, 0.245, 0.246, 0.247, 0.248, 0.249, 0.25, 0.251, 0.252, 0.253,
+        0.254, 0.255, 0.256, 0.257, 0.258, 0.259, 0.26, 0.261, 0.262, 0.263,
+        0.264, 0.265, 0.266, 0.267, 0.268, 0.269, 0.27, 0.271, 0.272, 0.273,
+        0.274, 0.275, 0.276, 0.277, 0.278, 0.279, 0.28, 0.281,
+        0.28200000000000003, 0.28300000000000003, 0.28400000000000003,
+        0.28500000000000003, 0.28600000000000003, 0.28700000000000003,
+        0.28800000000000003, 0.28900000000000003, 0.29000000000000004, 0.291,
+        0.292, 0.293, 0.294, 0.295, 0.296, 0.297, 0.298, 0.299, 0.3, 0.301,
+        0.302, 0.303, 0.304, 0.305, 0.306, 0.307, 0.308, 0.309, 0.31, 0.311,
+        0.312, 0.313, 0.314, 0.315, 0.316, 0.317, 0.318, 0.319, 0.32, 0.321,
+        0.322, 0.323, 0.32399999999999995, 0.32499999999999996,
+        0.32599999999999996, 0.32699999999999996, 0.32799999999999996,
+        0.32899999999999996, 0.32999999999999996, 0.33099999999999996,
+        0.33199999999999996, 0.33299999999999996, 0.33399999999999996,
+        0.33499999999999996, 0.33599999999999997, 0.33699999999999997,
+        0.33799999999999997, 0.33899999999999997, 0.33999999999999997,
+        0.34099999999999997, 0.34199999999999997, 0.34299999999999997, 0.344,
+        0.345, 0.346, 0.347, 0.348, 0.349, 0.35, 0.351, 0.352, 0.353, 0.354,
+        0.355, 0.356, 0.357, 0.358, 0.359, 0.36, 0.361, 0.362, 0.363, 0.364,
+        0.365, 0.366, 0.367, 0.368, 0.369, 0.37, 0.371, 0.372, 0.373, 0.374,
+        0.375, 0.376, 0.377, 0.378, 0.379, 0.38, 0.381, 0.382, 0.383, 0.384,
+        0.385, 0.386, 0.387, 0.388, 0.389, 0.39, 0.391, 0.392, 0.393, 0.394,
+        0.395, 0.396, 0.397, 0.398, 0.399, 0.4, 0.401, 0.402, 0.403, 0.404,
+        0.405, 0.406, 0.40700000000000003, 0.40800000000000003,
+        0.40900000000000003, 0.41000000000000003, 0.41100000000000003, 0.412,
+        0.413, 0.414, 0.415, 0.416, 0.417, 0.418, 0.419, 0.42, 0.421, 0.422,
+        0.423, 0.424, 0.425, 0.426, 0.427, 0.428, 0.429, 0.43, 0.431, 0.432,
+        0.433, 0.434, 0.435, 0.436, 0.437, 0.438, 0.439, 0.44, 0.441, 0.442,
+        0.443, 0.444, 0.445, 0.446, 0.447, 0.448, 0.449, 0.45, 0.451, 0.452,
+        0.453, 0.454, 0.455, 0.456, 0.457, 0.458, 0.459, 0.46, 0.461, 0.462,
+        0.46299999999999997, 0.46399999999999997, 0.46499999999999997,
+        0.46599999999999997, 0.46699999999999997, 0.46799999999999997, 0.469,
+        0.47, 0.471, 0.472, 0.473, 0.474, 0.475, 0.476, 0.477, 0.478, 0.479,
+        0.48, 0.481, 0.482, 0.483, 0.484, 0.485, 0.486, 0.487, 0.488, 0.489,
+        0.49, 0.491, 0.492, 0.493, 0.494, 0.495, 0.496, 0.497, 0.498, 0.499 } ;
+
+      static real_T pDataValues[] = { -5.0, -5.0, -5.0, -5.0, -5.0, -5.0, -5.0,
+        5.0, 5.0, 5.0, -5.0, -5.0, -5.0, -5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0,
+        -5.0, 5.0, 5.0, 5.0, -5.0, -5.0, -5.0, 5.0, -5.0, -5.0, 5.0, 5.0, 5.0,
+        5.0, 5.0, -5.0, -5.0, -5.0, 5.0, 5.0, -5.0, -5.0, 5.0, 5.0, 5.0, 5.0,
+        5.0, -5.0, 5.0, -5.0, 5.0, 5.0, -5.0, -5.0, 5.0, -5.0, 5.0, 5.0, -5.0,
+        -5.0, 5.0, -5.0, -5.0, 5.0, -5.0, -5.0, 5.0, -5.0, -5.0, -5.0, -5.0,
+        -5.0, -5.0, -5.0, -5.0, -5.0, 5.0, -5.0, -5.0, -5.0, -5.0, -5.0, -5.0,
+        5.0, -5.0, -5.0, 5.0, -5.0, -5.0, -5.0, 5.0, -5.0, -5.0, -5.0, -5.0,
+        -5.0, 5.0, 5.0, -5.0, -5.0, 5.0, -5.0, -5.0, 5.0, 5.0, -5.0, 5.0, -5.0,
+        -5.0, -5.0, -5.0, 5.0, -5.0, -5.0, 5.0, -5.0, 5.0, -5.0, 5.0, -5.0, -5.0,
+        -5.0, -5.0, 5.0, 5.0, 5.0, 5.0, -5.0, 5.0, -5.0, 5.0, 5.0, 5.0, -5.0,
+        5.0, -5.0, 5.0, 5.0, -5.0, 5.0, 5.0, -5.0, 5.0, 5.0, -5.0, -5.0, -5.0,
+        -5.0, -5.0, -5.0, -5.0, -5.0, 5.0, 5.0, -5.0, -5.0, -5.0, -5.0, -5.0,
+        5.0, 5.0, -5.0, 5.0, 5.0, -5.0, -5.0, 5.0, 5.0, -5.0, -5.0, -5.0, -5.0,
+        5.0, -5.0, 5.0, -5.0, 5.0, 5.0, -5.0, 5.0, -5.0, 5.0, 5.0, 5.0, -5.0,
+        -5.0, -5.0, 5.0, 5.0, -5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, -5.0, -5.0,
+        -5.0, 5.0, -5.0, -5.0, -5.0, 5.0, 5.0, 5.0, 5.0, -5.0, -5.0, 5.0, 5.0,
+        5.0, 5.0, -5.0, 5.0, 5.0, -5.0, 5.0, 5.0, -5.0, 5.0, -5.0, -5.0, -5.0,
+        -5.0, -5.0, -5.0, -5.0, 5.0, -5.0, 5.0, -5.0, -5.0, -5.0, -5.0, 5.0,
+        -5.0, 5.0, 5.0, -5.0, 5.0, -5.0, 5.0, -5.0, 5.0, -5.0, -5.0, -5.0, 5.0,
+        5.0, 5.0, 5.0, 5.0, -5.0, 5.0, 5.0, 5.0, 5.0, -5.0, -5.0, 5.0, -5.0,
+        -5.0, 5.0, -5.0, 5.0, 5.0, -5.0, -5.0, -5.0, -5.0, -5.0, 5.0, -5.0, -5.0,
+        5.0, 5.0, -5.0, -5.0, 5.0, -5.0, -5.0, -5.0, 5.0, -5.0, 5.0, -5.0, -5.0,
+        -5.0, 5.0, 5.0, -5.0, 5.0, 5.0, -5.0, 5.0, 5.0, 5.0, -5.0, -5.0, -5.0,
+        -5.0, -5.0, -5.0, 5.0, 5.0, 5.0, 5.0, -5.0, -5.0, -5.0, 5.0, 5.0, 5.0,
+        -5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, 5.0, -5.0, -5.0, 5.0, -5.0, -5.0,
+        -5.0, -5.0, 5.0, 5.0, -5.0, -5.0, -5.0, 5.0, -5.0, 5.0, 5.0, -5.0, 5.0,
+        5.0, 5.0, -5.0, 5.0, -5.0, -5.0, -5.0, -5.0, 5.0, 5.0, -5.0, 5.0, -5.0,
+        5.0, -5.0, 5.0, 5.0, -5.0, -5.0, 5.0, 5.0, 5.0, 5.0, -5.0, -5.0, 5.0,
+        -5.0, 5.0, 5.0, -5.0, 5.0, 5.0, -5.0, -5.0, 5.0, -5.0, -5.0, -5.0, -5.0,
+        -5.0, 5.0, -5.0, -5.0, -5.0, 5.0, -5.0, -5.0, 5.0, -5.0, -5.0, 5.0, 5.0,
+        -5.0, -5.0, -5.0, -5.0, -5.0, -5.0, 5.0, -5.0, 5.0, 5.0, -5.0, -5.0,
+        -5.0, 5.0, -5.0, 5.0, -5.0, -5.0, 5.0, 5.0, 5.0, -5.0, 5.0, 5.0, -5.0,
+        -5.0, 5.0, 5.0, 5.0, -5.0, -5.0, -5.0, 5.0, -5.0, 5.0, 5.0, 5.0, 5.0,
+        5.0, 5.0, -5.0, 5.0, -5.0, 5.0, -5.0, -5.0, -5.0, 5.0, -5.0, 5.0, 5.0,
+        5.0, -5.0, 5.0, 5.0, -5.0, 5.0, -5.0, 5.0, 5.0, -5.0, -5.0, -5.0, -5.0,
+        5.0, 5.0, -5.0, -5.0, 5.0, 5.0, -5.0, 5.0, 5.0, -5.0, 5.0, -5.0, 5.0,
+        -5.0, -5.0, -5.0, -5.0, -5.0, 5.0, 5.0, 5.0, -5.0, 5.0, -5.0, -5.0, 5.0,
+        5.0, 5.0, 5.0, -5.0, 5.0, -5.0, -5.0, 5.0, 5.0, -5.0, 5.0, -5.0, 5.0,
+        -5.0, -5.0, 5.0, -5.0, -5.0 } ;
+
+      UnWaterChannelProbe3_DWork.FromWorkspace_PWORK.TimePtr = (void *)
+        pTimeValues;
+      UnWaterChannelProbe3_DWork.FromWorkspace_PWORK.DataPtr = (void *)
+        pDataValues;
+      UnWaterChannelProbe3_DWork.FromWorkspace_IWORK.PrevIndex = 0;
+    }
+
     /* Level2 S-Function Block: '<Root>/PCI-6713 DA1' (danipci671x) */
     {
       SimStruct *rts = UnWaterChannelProbe3_rtM->childSfunctions[1];
@@ -1000,7 +1118,7 @@ void MdlStart(void)
           rl32eAddSignal(4, rl32eGetSignalNo("Gain"));
           rl32eAddSignal(4, rl32eGetSignalNo("Gain2"));
           rl32eAddSignal(4, rl32eGetSignalNo("Gain3"));
-          rl32eAddSignal(4, rl32eGetSignalNo("Signal Generator1"));
+          rl32eAddSignal(4, rl32eGetSignalNo("From Workspace"));
           rl32eSetScope(4, 4, 100);
           rl32eSetScope(4, 40, 0);
           rl32eSetScope(4, 7, 1);
@@ -1019,44 +1137,6 @@ void MdlStart(void)
       if (i) {
         rl32eRestartAcquisition(4);
       }
-    }
-
-    /* Start for FromWorkspace: '<Root>/From Workspace' */
-    {
-      static real_T pTimeValues[] = { 0.0, 0.001, 0.002, 0.003, 0.004, 0.005,
-        0.006, 0.007, 0.008, 0.0090000000000000011, 0.01, 0.011, 0.012,
-        0.013000000000000001, 0.014, 0.015, 0.016, 0.017, 0.018000000000000002,
-        0.019, 0.02, 0.021, 0.022, 0.023, 0.024, 0.025, 0.026000000000000002,
-        0.027, 0.028, 0.029, 0.03, 0.031, 0.032, 0.033, 0.034, 0.035,
-        0.036000000000000004, 0.037, 0.038, 0.039, 0.04, 0.041, 0.042,
-        0.043000000000000003, 0.044, 0.045, 0.046, 0.047, 0.048, 0.049, 0.05,
-        0.051000000000000004, 0.052000000000000005, 0.053000000000000005,
-        0.054000000000000006, 0.055000000000000007, 0.056, 0.057, 0.058,
-        0.059000000000000004, 0.060000000000000005, 0.061000000000000006,
-        0.062000000000000006, 0.063, 0.064, 0.065, 0.066, 0.067, 0.068, 0.069,
-        0.07, 0.071000000000000008, 0.072000000000000008, 0.073000000000000009,
-        0.07400000000000001, 0.075000000000000011, 0.076000000000000012,
-        0.077000000000000013, 0.078, 0.079, 0.08, 0.081, 0.082, 0.083, 0.084,
-        0.085, 0.086000000000000007, 0.087000000000000008, 0.088000000000000009,
-        0.08900000000000001, 0.09, 0.091, 0.092, 0.093, 0.094, 0.095, 0.096,
-        0.097, 0.098, 0.099 } ;
-
-      static real_T pDataValues[] = { -10.0, -10.0, -10.0, -10.0, -10.0, -10.0,
-        -10.0, 10.0, 10.0, 10.0, -10.0, -10.0, -10.0, -10.0, 10.0, 10.0, 10.0,
-        10.0, 10.0, 10.0, -10.0, 10.0, 10.0, 10.0, -10.0, -10.0, -10.0, 10.0,
-        -10.0, -10.0, 10.0, 10.0, 10.0, 10.0, 10.0, -10.0, -10.0, -10.0, 10.0,
-        10.0, -10.0, -10.0, 10.0, 10.0, 10.0, 10.0, 10.0, -10.0, 10.0, -10.0,
-        10.0, 10.0, -10.0, -10.0, 10.0, -10.0, 10.0, 10.0, -10.0, -10.0, 10.0,
-        -10.0, -10.0, 10.0, -10.0, -10.0, 10.0, -10.0, -10.0, -10.0, -10.0,
-        -10.0, -10.0, -10.0, -10.0, -10.0, 10.0, -10.0, -10.0, -10.0, -10.0,
-        -10.0, -10.0, 10.0, -10.0, -10.0, 10.0, -10.0, -10.0, -10.0, 10.0, -10.0,
-        -10.0, -10.0, -10.0, -10.0, 10.0, 10.0, -10.0, -10.0 } ;
-
-      UnWaterChannelProbe3_DWork.FromWorkspace_PWORK.TimePtr = (void *)
-        pTimeValues;
-      UnWaterChannelProbe3_DWork.FromWorkspace_PWORK.DataPtr = (void *)
-        pDataValues;
-      UnWaterChannelProbe3_DWork.FromWorkspace_IWORK.PrevIndex = 0;
     }
 
     /* Start for S-Function (sdsprandsrc2): '<Root>/Random Source' */

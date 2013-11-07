@@ -5,7 +5,7 @@ clc;
 %data_i = randperm(21);
 %train_i = data_i(1:floor(length(data_i))/2);
 %test_i = data_i((floor(length(data_i)/2)+1):end);
-train_i = 1:29;
+train_i = 1:34;
 Anorm = zeros(2,1);
 s_norm = zeros(2,1);
 Amat = {};
@@ -47,6 +47,8 @@ for i=1:length(H2Norm_I)
         break; 
     end
 end
+
+train_i = 1:34;
 
 %rand_i = randperm(i);
 %train_i = H2Norm_I(rand_i(1:floor(i/2)));
@@ -114,15 +116,15 @@ for i = 1:length(train_i)
    
    b4th_temp = load(b4th_str);
    b4th_fields = fieldnames(b4th_temp);
-   b4tharray(:,index) = b4th_temp.(b4th_fields{1});
+   b4tharray(:,i) = b4th_temp.(b4th_fields{1});
    
    % get singular and/or norm values
    svd_values = svd(A_temp.(A_fields{1}).A);
    s_norm = norm(A_temp.(A_fields{1})); % id model norm
    s_norm_inf = norm(A_temp.(A_fields{1}),inf);
    
-  %Anorm(i) = svd_values(1);
-   Anorm(i) = s_norm;
+   %Anorm(i) = svd_values(1);
+   Anorm(i) = s_norm_inf;
    
    %AnormArray(i,:) = [s_norm, s_norm_inf];
    AnormArray(i,:) = [svd_values(1), svd_values(2), svd_values(3), s_norm, s_norm_inf];
@@ -134,7 +136,7 @@ b4tharray = b4tharray'; % 4th order regression coeff
 bquadarray = bquadarray'; % 2nd order regression coeff
 DataCor = [Anorm, bquadarray];
 [blah,I] = sort(DataCor(:,1),1);
-DataCor = DataCor(I,:);
+%DataCor = DataCor(I,:);
 
 % averaging svd/norm data points
 % [s1 s2] = size(bquadarray);
@@ -340,15 +342,15 @@ for i=2:7
     plotindex = plotindex + 1;
     subplot(2,3,plotindex)
     % mean left in
-    plot(DataCorAdj(:,1),DataCorAdj(:,i),'-rs',DataCor(:,1),DataCor(:,i),'-b*')
-    %scatter(DataCor(:,1),DataCor(:,i));
+    %plot(DataCorAdj(:,1),DataCorAdj(:,i),'-rs',DataCor(:,1),DataCor(:,i),'-b*')
+    scatter(DataCor(1:15,1),DataCor(1:15,i));
     % mean subtracted
     %plot(DataCorAdj(:,1),(DataCorAdj(:,i) - mean(DataCorAdj(:,i))),'-rs',DataCor(:,1),(DataCor(:,i) - mean(DataCor(:,i))),'-b*')
     %plot(DataCor(:,1),DataCor(:,i),'-b*')
     legend('predict','truth');
     xlabel(num2str(i));
 end
-
+%%
 figure();
 plotindex = 0;
 for i=1:8

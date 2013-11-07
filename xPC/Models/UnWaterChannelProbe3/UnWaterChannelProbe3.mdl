@@ -11,7 +11,7 @@ Model {
       Name		      "Outport"
     }
     ParameterArgumentNames  ""
-    ComputedModelVersion    "1.130"
+    ComputedModelVersion    "1.209"
     NumModelReferences	    0
     NumTestPointedSignals   0
   }
@@ -31,9 +31,9 @@ Model {
   ModifiedByFormat	  "%<Auto>"
   LastModifiedBy	  "newton"
   ModifiedDateFormat	  "%<Auto>"
-  LastModifiedDate	  "Fri Sep 13 17:22:11 2013"
-  RTWModifiedTimeStamp	  300992018
-  ModelVersionFormat	  "1.%<AutoIncrement:130>"
+  LastModifiedDate	  "Tue Nov 05 15:53:16 2013"
+  RTWModifiedTimeStamp	  305552034
+  ModelVersionFormat	  "1.%<AutoIncrement:209>"
   ConfigurationManager	  "none"
   SampleTimeColors	  off
   SampleTimeAnnotations	  off
@@ -722,7 +722,7 @@ Model {
   }
   System {
     Name		    "UnWaterChannelProbe3"
-    Location		    [174, 136, 1262, 779]
+    Location		    [174, 136, 1278, 779]
     Open		    on
     ModelBrowserVisibility  on
     ModelBrowserWidth	    172
@@ -741,7 +741,7 @@ Model {
       BlockType		      FromWorkspace
       Name		      "From\nWorkspace"
       SID		      "30"
-      Position		      [20, 128, 85, 152]
+      Position		      [25, 128, 90, 152]
       ZOrder		      -10
       VariableName	      "prbs_train"
       SampleTime	      "1e-4"
@@ -955,7 +955,7 @@ Model {
       Name		      "Signal\nGenerator1"
       SID		      "21"
       Ports		      [0, 1]
-      Position		      [35, 55, 65, 85]
+      Position		      [40, 55, 70, 85]
       WaveForm		      "square"
       Amplitude		      "10"
       Frequency		      "500"
@@ -1058,13 +1058,13 @@ Model {
     Line {
       SrcBlock		      "Signal\nGenerator1"
       SrcPort		      1
-      Points		      [65, 0]
+      Points		      [60, 0]
       Branch {
 	DstBlock		"Rate Transition"
 	DstPort			1
       }
       Branch {
-	Points			[0, 525; 550, 0; 0, -260]
+	Points			[0, 515; 530, 0; 0, -250]
 	DstBlock		"Mux"
 	DstPort			4
       }
