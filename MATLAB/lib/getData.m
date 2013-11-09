@@ -1,4 +1,4 @@
-function [sys_train,OutputLog,x,y] = getData(basePath, sets)
+function [sys_train,OutputLog,x,y,rx_train] = getData(basePath, sets)
     %[sys_train,OutputLog,x,y] = getData(basePath, sets)
     %pc example
     %'C:\Users\newton\AeroFS\NESL_Software\electrosense\DATA\ModelWeekLogOrder4\AL\'
@@ -16,6 +16,7 @@ function [sys_train,OutputLog,x,y] = getData(basePath, sets)
     x_str = [basePath,num2str(sets,'%02d'),'\x_',num2str(sets,'%02d'),'.mat'];
     y_str = [basePath,num2str(sets,'%02d'),'\y_',num2str(sets,'%02d'),'.mat'];
     outputlog_str = [basePath,num2str(sets,'%02d'),'\OutputLog_',num2str(sets,'%02d'),'.mat'];
+    rx_train_str = [basePath,num2str(sets,'%02d'),'\rx_train_',num2str(sets,'%02d'),'.mat'];
     else
     sys_train_str = [basePath,num2str(sets,'%02d'),'/sys_train_',num2str(sets,'%02d'),'.mat'];
     bquad_str = [basePath,num2str(sets,'%02d'),'/bquad_',num2str(sets,'%02d'),'.mat'];
@@ -23,6 +24,7 @@ function [sys_train,OutputLog,x,y] = getData(basePath, sets)
     x_str = [basePath,num2str(sets,'%02d'),'/x_',num2str(sets,'%02d'),'.mat'];
     y_str = [basePath,num2str(sets,'%02d'),'/y_',num2str(sets,'%02d'),'.mat'];
     outputlog_str = [basePath,num2str(sets,'%02d'),'/OutputLog_',num2str(sets,'%02d'),'.mat'];
+    rx_train_str = [basePath,num2str(sets,'%02d'),'/rx_train_',num2str(sets,'%02d'),'.mat'];
     end
 
     if exist(sys_train_str)
@@ -47,5 +49,11 @@ function [sys_train,OutputLog,x,y] = getData(basePath, sets)
         temp = load(y_str);
         tempFields = fieldnames(temp);
         y = temp.(tempFields{1});
+    end
+    
+    if exist(rx_train_str)
+        temp = load(rx_train_str);
+        tempFields = fieldnames(temp);
+        rx_train = temp.(tempFields{1});
     end
 end

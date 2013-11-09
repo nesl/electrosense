@@ -11,7 +11,7 @@ s_norm = zeros(2,1);
 train_i = 1:57;
 for i = train_i
     %basePath = 'C:\Users\newton\AeroFS\NESL_Software\electrosense\DATA\ModelWeekLogOrder3\AL\';
-    basePath = '/Users/newton/AeroFS/NESL_Software/electrosense/DATA/ModelWeekLogOrder3/AL/';
+    basePath = '/Users/newton/Dropbox/NESL_Software/electrosense/DATA/ModelWeekLogOrder3/AL/';
     [sys_train, OutputLog_a, x_a, y_a] = getData(basePath,i);
 
     % get singular and/or norm values

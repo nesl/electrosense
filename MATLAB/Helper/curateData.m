@@ -3,7 +3,7 @@
 kalMeanIndexZero = zeros(1,3);
 kalMeanIndexOne = zeros(1,3);
 snorm = [];
-basePath =  'C:\Users\newton\AeroFS\NESL_Software\electrosense\DATA\ModelWeekLogOrder3\AL\';
+basePath =  'C:\Users\newton\Dropbox\NESL_Software\electrosense\DATA\ModelWeekLogOrder3\AL\';
 for i=1:58
    [sys_train,OutputLog,x,y] = getData(basePath, i);
    snorm(i) = norm(sys_train);
