@@ -197,17 +197,28 @@ for j = 1:size(y,1)/30
   endi = starti + 29;
   ytemp2(j,:) = mean(y(starti:endi,:));
 end
-%%
+%% 
+scatter(ytemp2(1:2:16),xtemp2(1:2:16,1),100,'filled');
+hold on;
+scatter(ytemp2(1:2:16),xtemp2(1:2:16,2),100,'filled');
+scatter(ytemp2(1:2:16),xtemp2(1:2:16,3),100,'filled');
+hold off;
+%legend('1','2','3')
+%axis([0,7.5,0,0.025])
+ylabel('Averaged Kalman filter output','fontsize',14);
+xlabel('Distance from target (inches)','fontsize',14);
+%title('Target at 45 degrees form center')
+%% linearized
 scatter(ytemp2(1:2:16),(1./xtemp2(1:2:16,1)).^(1/3),100,'filled');
-%hold on;
+hold on;
 scatter(ytemp2(1:2:16),(1./xtemp2(1:2:16,2)).^(1/3),100,'filled');
 scatter(ytemp2(1:2:16),(1./xtemp2(1:2:16,3)).^(1/3),100,'filled');
-%hold off;
-legend('1','2','3')
+hold off;
+%legend('1','2','3')
 %axis([0,7.5,0,0.025])
-ylabel('Averaged Kalman filter output');
-xlabel('distance from target (inches)');
-title('Target at 45 degrees form center')
+ylabel('Averaged Kalman filter output','fontsize',14);
+xlabel('Distance from target (inches)','fontsize',14);
+%title('Target at 45 degrees form center')
 %%
 
 scatter(ytemp2(1:16,:),sum(xtemp2(1:16,:),2));

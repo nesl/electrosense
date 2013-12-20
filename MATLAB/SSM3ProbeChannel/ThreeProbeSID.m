@@ -76,7 +76,7 @@ rtwbuild(gcs);
 tg.start; pause(3);
 rx_test = tg.OutputLog(1:sampled_length,1:3);
 tx_test = tg.OutputLog(1:sampled_length,4);
-
+%%
 
 rx_average_test = mean(rx_test,1);
 for i=1:3
